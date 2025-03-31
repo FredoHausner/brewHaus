@@ -1,30 +1,76 @@
 <script setup lang="ts">
-import HelloWorld from "./components/HelloWorld.vue";
+import BreweryHeader from "./components/BreweryHeader.vue";
+import BreweryList from "./components/BreweryList.vue";
+import {getInitialBreweries} from "./Services/breweryServices.ts";
+
+import {ref, onMounted} from "vue";
+
+const breweries = ref([]);
+const page = ref(1);
+const initialLoad = ref(false);
+const paginationLoading = ref(false);
+const hasMore = ref(false);
+
+onMounted(() => {
+  getInitialBreweries().then((res) => {
+    breweries.value = res.data;
+  });
+});
 </script>
 
 <template>
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
+  <div class="AppWrapperMain">
+    <div class="video-wrapper">
+      <video autoplay loop muted playsinline class="background-video">
+        <source src="./assets/beer-loop.mp4" type="video/mp4" />
+      </video>
+    </div>
+
+    <div class="content-wrapper">
+      <BreweryHeader />
+      <BreweryList :breweries="breweries" />
+    </div>
   </div>
-  <HelloWorld msg="Vite + Vue" />
 </template>
 
 <style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+.AppWrapperMain {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+
+.video-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -1;
 }
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+
+.background-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.5;
+}
+
+.content-wrapper {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* backdrop-filter: blur(1px); */
 }
 </style>
