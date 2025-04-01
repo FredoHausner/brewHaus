@@ -7,3 +7,7 @@ export const getInitialBreweries = async (page: number) => {
 export const breweryAutoFill = async (autoFillInput: string) => {
   return await baseApi.get(`/autocomplete?query={${autoFillInput}}`);
 };
+
+export const getBreweryById = async (id: string) => {
+  return await baseApi.get(`/${id}`);
+};

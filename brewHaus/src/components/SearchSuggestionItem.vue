@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import type {BreweryItem} from "../types";
-
+import {useRouter} from "vue-router";
+const router = useRouter();
 const props = defineProps<{
   brewery: BreweryItem;
 }>();
 
 const clickListItem = () => {
-  console.log({...props.brewery});
+  router.push({name: "BreweryDetails", params: {id: props.brewery.id}});
 };
 </script>
 
