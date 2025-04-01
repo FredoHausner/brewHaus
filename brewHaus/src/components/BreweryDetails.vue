@@ -56,7 +56,6 @@ onMounted(async () => {
       </div>
 
       <div class="infoSection" v-if="brewery?.website_url">
-        <h2>Website Preview</h2>
         <iframe
           :src="formattedWebsiteUrl ?? undefined"
           frameborder="0"
