@@ -17,8 +17,8 @@ export interface BreweryItem {
   state_province: string;
   postal_code: string;
   country: string;
-  longitude: number | null;
-  latitude: number | null;
+  longitude: number;
+  latitude: number;
   phone: string | null;
   website_url: string | null;
   state: string;
