@@ -74,16 +74,18 @@ onMounted(async () => {
   width: 100vw;
   height: 100vh;
   background-color: #f0f0f0;
-  padding: 2rem;
+  overflow: auto;
 }
 
 .detailsCard {
   background: white;
-  padding: 2rem;
+  padding: 1rem;
   border-radius: 15px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   max-width: 600px;
   width: 100%;
+  height: 80%;
+  overflow: scroll;
 }
 
 h1 {
