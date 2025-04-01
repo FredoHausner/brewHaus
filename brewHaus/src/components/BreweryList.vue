@@ -1,10 +1,39 @@
 <script setup lang="ts">
 import BreweryListItem from "./BreweryListItem.vue";
 import type {BreweryItem} from "../types.ts";
+import {onMounted, onUnmounted} from "vue";
 
 const props = defineProps<{
   breweries: BreweryItem[];
 }>();
+
+const emit = defineEmits(["paginateBreweries"]);
+
+const handleScroll = (event: Event) => {
+  const target = event.target as HTMLElement;
+  const bottomReached =
+    target.scrollHeight - target.scrollTop <= target.clientHeight + 200;
+
+  if (bottomReached) {
+    emit("paginateBreweries");
+  }
+};
+
+onMounted(() => {
+  const wrapper = document.querySelector(
+    ".breweryListMainWrapper"
+  ) as HTMLElement;
+  wrapper.addEventListener("scroll", handleScroll);
+});
+
+onUnmounted(() => {
+  const wrapper = document.querySelector(
+    ".breweryListMainWrapper"
+  ) as HTMLElement;
+  if (wrapper) {
+    wrapper.removeEventListener("scroll", handleScroll);
+  }
+});
 </script>
 
 <template>
