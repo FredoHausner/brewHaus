@@ -20,7 +20,7 @@ const onInputChange = debounce(async (e: Event) => {
     try {
       const res = await breweryAutoFill(target.value);
       searchSuggestedBreweries.value = res.data;
-      showSearchSuggestions.value = true;
+      showSearchSuggestions.value = res.data.length;
     } catch (error) {
       console.error("Error fetching data:", error);
     }
